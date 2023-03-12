@@ -13,3 +13,10 @@ func printNo(n int) {
 func main() {
 	printNo(3)
 }
+
+// 3
+// 2
+// 1
+// After :  1
+// After :  2
+// After :  3
