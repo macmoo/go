@@ -19,3 +19,5 @@ func main() {
 	}
 	// fmt.Println("You're age is ", age) // error : age 는 소멸됨
 }
+
+// BEAUTIFUL 40
