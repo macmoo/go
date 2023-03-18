@@ -12,6 +12,7 @@ func main() {
 	fmt.Printf("%s != %s : %v\n", s1, s2, s1 != s2)
 	fmt.Printf("%s == %s : %v\n", s1, s3, s1 == s3)
 	fmt.Printf("%s != %s : %v\n", s1, s3, s1 != s3)
+	fmt.Printf("---------------------------------\n")
 }
 
 // ---------------------------------

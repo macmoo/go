@@ -14,7 +14,9 @@ func main() {
 
 	str := "Hello 월드"
 	rune := []rune(str)
-	fmt.Printf("len(str) = %d\n", len(str))
+	fmt.Printf("len(str) = %d\n", len(str)) // 바이트 길이
 	fmt.Printf("len(rune) = %d\n", len(rune))
-
 }
+
+// len(str) = 12 바이트
+// len(rune) = 8
