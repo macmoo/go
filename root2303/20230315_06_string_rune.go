@@ -26,4 +26,25 @@ func main() {
 	fmt.Printf("len(string(runes)):%d\n", len(string(runes)))
 	fmt.Printf("Sizeof(str3):%d\n", unsafe.Sizeof(str3))
 	fmt.Printf("Sizeof(runes):%d\n", unsafe.Sizeof(runes))
+
+	fmt.Printf("type:%T\n", str3)
+	fmt.Printf("type:%T\n", string(runes))
 }
+
+// int32
+// 54620
+// 한
+// -------------------------------
+// len(str1):15
+// len(str2):5
+// Sizeof(str1):16
+// Sizeof(str2):16
+// -------------------------------
+// Hello World
+// Hello World
+// len(str3):11
+// len(string(runes)):11
+// Sizeof(str3):16
+// Sizeof(runes):24
+// type:string
+// type:string
