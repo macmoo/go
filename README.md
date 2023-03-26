@@ -4,8 +4,8 @@
 |------|---|
 |환경설정|https://learn.microsoft.com/ko-kr/azure/developer/go/configure-visual-studio-code|
 |RUN|Ctrl+Alt+N|
-|MD|https://yunwoong.tistory.com/20|
-|||
+|마크다운|https://yunwoong.tistory.com/20|
+|패키지설명|https://qiita.com/fetaro/items/31b02b940ce9ec579baf|
 |||
 
 <br>
@@ -90,7 +90,12 @@
   따라서 메서드는 리시버에 속한 기능을 표현합니다. 모든 로컬 타입은 리시버가 될 수 있다.
 - 값 타입 메서드 호출 시 값이 모두 복사됩니다. 인스턴스가 아닌 값 중심의 메서드를 만들 때 사용한다.<br>
   호출자 인스턴스에 접근할 수 없고 복사되는 양에 따라서 성능상 문제가 될 수 있다.
-0 
+- 인터페이스란 구현을 포함하지 않는 메서드 집합
+- 추상화 계층을 이용해 의존 관계를 끊는 것을 디커플링decoupling이라함. 의존성이 낮을 수록 좋다.
+- Go 언어에서는 어떤 타입이 인터페이스를 포함하고 있는지 여부를 결정할 때 덕 타이핑duck typing<br>
+  방식을 사용합니다. 덕 타이핑 방식이란 타입 선언 시 인터페이스 구현 여부를 명시적으로 나타낼<br>
+  필요 없이 인터페이스에 정의한 메서드 포함 여부만으로 결정하는 방식입니다.
+- 
 
 
 
@@ -244,6 +249,23 @@ func (r Rabbit) info() int {
 }
 </code></pre>
 
+### ※ 인터페이스
+<pre><code>// 인터페이스 선언은 1 type을 쓴 뒤 2 인터페이스명을 쓰고 3 interface 키워드를 씁니다.
+// 그런 뒤 중괄호 4 { } 블록 안에 인터페이스에 포함된 메서드 집합을 써줍니다
+type DuckInterface interface {
+    Fly()
+    Walk(distance int) int
+}
+</code></pre>
+### ※ 
+<pre><code>
+</code></pre>
+### ※ 
+<pre><code>
+</code></pre>
+### ※ 
+<pre><code>
+</code></pre>
 ### ※ 
 <pre><code>
 </code></pre>
