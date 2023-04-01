@@ -99,9 +99,19 @@
   그래서 인터페이스를 사용할 때 항상 인터페이스값이 nil이 아닌지 확인해야 한다.
 - 인터페이스뿐만 아니라 nil값을 기본으로 갖는 다른 타입 변수 역시 사용하기 전에 값이 nil인지 확인해야 한다.<br>
   기본값을 nil로 갖는 타입은 포인터, 인터페이스, 함수 타입, 슬라이스, 맵, 채널 등이 있다.
+- defer 지연 실행<br>
+  이와 같이 적으면 명령문이 바로 실행되는 게 아닌 해당 함수가 종료되기 직전에 실행되도록 지연된다.<br>
+  명령문은 한 줄의 코드로 일반적으로 함수 호출을 사용<br>
+  defer는 역순으로 호출됨
+- 함수 타입은 함수명과 함수 코드 블록을 제외한 함수 정의function signature로 표시<br>
+  별칭 : type opFunc func (int, int) int<br>
+         func getOperator(op string) opFunc
+  함수 정의에서 매개변수명은 적어도 되고 적지 않아도 됨.
+- 함수 리터럴function literal은 이름 없는 함수로 함수명을 적지 않고 함수 타입 변숫값으로 대입되는 함숫값을 의미.<br>
+  함수명이 없기 때문에 함수명으로 직접 함수를 호출할 수 없고 함수 타입변수로만 호출됨.<br>
+  다른 프로그래밍 언어에서는 익명 함수 또는 람다Lambda라고 부름.
 - 
-
-
+- 
 
 
 <br>
@@ -261,15 +271,69 @@ type DuckInterface interface {
     Walk(distance int) int
 }
 </code></pre>
-### ※ 
-<pre><code>
+### ※ 인터페이스 변환
+<pre><code>// 1. 구체화된 다른 타입으로 타입 변환하기
+//    사용 방법은 인터페이스 변수 뒤에 점 .을 찍고 소괄호 () 안에 변경하려는 타입을 써주면 됩니다.
+var a Interface
+// 인터페이스 변수 a를 ConcreteType 타입으로 변환하고, ConcreteType 타입 변수 t를 생성하고 대입
+t := a .(ConcreteType)
+// ---------------------------------
+// 2. 다른 인터페이스로 타입 변환하기
+//    인터페이스 변환을 통해 구체화된 타입뿐 아니라 다른 인터페이스로 타입 변환할 수 있다.
+//    이때는 구체화된 타입으로 변환할 때와는 달리 변경되는 인터페이스가 변경 전 인터페이스를 포함
+//    하지 않아도 된다. 하지만 인터페이스가 가리키고 있는 실제 인스턴스가 변환하고자 하는 다른 인터페이스를 포함해야 한다.
+var a AInterface = ConcreteType{}
+b := a.(BInterface)
+// AInterface 변수 a는 BInterface로 타입 변환이 가능.
+// 그 이유는 a가 가리키고 있는 ConcreteType 인스턴스는 BInterface도 포함 하고 있기 때문.
+// ※ 타입 변환 성공 여부 반환
+//    타입 변환 반환값을 두 개의 변수로 받으면 타입 변환 가능 여부를 두 번째 반환값(불리언 타입)으로 알려준다.
+//    이때 타입 변환이 불가능하더라도 두 번째 반환값이 false로 반환될 뿐 런 타임 에러는 발생하지 않는다.
+var a Interface
+t, ok := a.(ConcreteType)
+// t  : 타입 변환한 결과
+// ok : 변환 성공 여부
 </code></pre>
-### ※ 
-<pre><code>
+
+### ※ 덕 타이핑
+<pre><code>// Go 언어에서는 어떤 타입이 인터페이스를 포함하고 있는지 여부를 결정할 때 덕 타이핑duck typing방식을 사용합니다.
+//덕 타이핑 방식이란 타입 선언 시 인터페이스 구현 여부를 명시적으로 나타낼 필요 없이 인터페이스에 정의한 메서드 포함 여부만으로 결정하는 방식.
+// 인터페이스 정의
+type Stringer interface {
+    String() string
+}
+// Student 타입 선언 시 Stringer 인터페이스 포함 여부를 명시적으로 나타내지 않아도
+// String() 메서드를 포함하고 있는 것만으로 Stringer 인터페이스를 사용할 수 있다.
+type Student struct {
+    ...
+}
+func (s *Student) String() string {
+    ...
+}
 </code></pre>
-### ※ 
-<pre><code>
+
+### ※ Print()
+<pre><code>func Print(args ...interface{}) string { // 1 모든 타입을 받는 가변 인수
+    // 2 모든 인수 순회
+    for _, arg := range args {
+        // 3 인수의 타입에 따른 동작
+        switch f := arg.(type) {
+        case bool:
+            // 4 인터페이스 변환
+            val := arg.(bool)
+            // val 값 출력 로직 생략
+        case float64:
+            val := arg.(float64)
+            // val 값 출력 로직 생략
+        case int:
+            val := arg.(int)
+            // val 값 출력 로직 생략
+            // 다른 타입들도 위와 같이 반복
+        }
+    }
+}
 </code></pre>
+
 ### ※ 
 <pre><code>
 </code></pre>
