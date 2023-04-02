@@ -51,7 +51,7 @@
   GO모듈생성 => go mod init [패키지명]<br>
   go mod tidy 명령은 Go 모듈에 필요한 패키지를 찾아서 다운로드해주고 필요한 패키지 정보를<br>
   go.mod 파일과 go.sum 파일에 적어준다.
-- <span style="color:yellow">※ 메모리정렬</span><br>
+- <span style="color:red">※ 메모리정렬</span><br>
   레지스터는 실제 연산에 사용되는 데이터가 저장되는 곳.<br>
   레지스터 크기가 4바이트인 컴퓨터를 32비트 컴퓨터라 부르고<br>
   레지스터 크기가 8바이트인 컴퓨터를 64비트 컴퓨터라고 함.(한 번에 8바이트 크기를 연산가능)<br>
@@ -62,7 +62,7 @@
   이 경우 100번지가 아니라 8의 배수인 104번지에 할당.<br>
   메모리 정렬을 위해서 필드 사이에 공간을 띄우는 것을 메모리 패딩Memory Padding이라고 합니다<br>
   참고로 4바이트 변수의 시작 주소는 4의 배수로 맞추고 2바이트 변수의 시작 주소는 2의 배수로 맞춰서 패딩
-- <span style="color:yellow">배열</span>은 처음 배열을 만들 때 정한 길이에서 더 이상 늘어나지 않는다.<br>
+- <span style="color:red">배열</span>은 처음 배열을 만들 때 정한 길이에서 더 이상 늘어나지 않는다.<br>
   슬라이스는 배열과 비슷하지만 [ ] 안에 배열의 개수를 적지 않고 선언합니다.<br>
   배열 : var array [10]int<br>
   슬라이스 : var slice []int
@@ -99,24 +99,33 @@
   그래서 인터페이스를 사용할 때 항상 인터페이스값이 nil이 아닌지 확인해야 한다.
 - 인터페이스뿐만 아니라 nil값을 기본으로 갖는 다른 타입 변수 역시 사용하기 전에 값이 nil인지 확인해야 한다.<br>
   기본값을 nil로 갖는 타입은 포인터, 인터페이스, 함수 타입, 슬라이스, 맵, 채널 등이 있다.
-- <span style="color:yellow">defer 지연 실행</span><br>
+- <span style="color:red">defer 지연 실행</span><br>
   이와 같이 적으면 명령문이 바로 실행되는 게 아닌 해당 함수가 종료되기 직전에 실행되도록 지연된다.<br>
   명령문은 한 줄의 코드로 일반적으로 함수 호출을 사용<br>
   defer는 역순으로 호출됨
-- <span style="color:yellow">함수 타입</span><br>
+- <span style="color:red">함수 타입</span><br>
   함수 타입은 함수명과 함수 코드 블록을 제외한 함수 정의function signature로 표시<br>
   별칭 : type opFunc func (int, int) int<br>
   &emsp;&emsp;&emsp;func getOperator(op string) opFunc
   함수 정의에서 매개변수명은 적어도 되고 적지 않아도 됨.
-- <span style="color:yellow">함수 리터럴function literal</span><br>
+- <span style="color:red">함수 리터럴function literal</span><br>
   이름 없는 함수로 함수명을 적지 않고 함수 타입 변숫값으로 대입되는 함숫값을 의미.<br>
   함수명이 없기 때문에 함수명으로 직접 함수를 호출할 수 없고 함수 타입변수로만 호출됨.<br>
   다른 프로그래밍 언어에서는 익명 함수 또는 람다Lambda라고 부름.
   함수 리터럴은 필요한 변수를 내부 상태로 가질 수 있다. 함수 리터럴 내부에서 사용되는 외부 변수는 자동으로 함수 내부 상태로 저장된다.
   함수 리터럴에서 외부 변수를 내부 상태로 가져올 때 값 복사가 아닌 인스턴스 참조로 가져오게 됩니다. 포인터 형태로 가져온다고 보면 됨.
-- <span style="color:yellow">캡쳐capture</span><br>
+- <span style="color:red">캡쳐capture</span><br>
   함수 리터럴 외부 변수를 내부 상태로 가져오는 것을 캡쳐capture라고 한다. 캡쳐는 값 복사가 아닌 참조 형태로 가져오게 되니 주의해야 한다.
-- 
+- <span style="color:red">의존성 주입</span>[link][link_ij]<br>
+  writeHello() 함수 입장에서 생각해보겠습니다. writeHello()는 인수로 Writer 함수 타입을 받습니다. 
+  writeHello() 함수 입장에서 보면 인수로 온 writer를 호출했을 때 그게 파일에 씌여질지 네트워크로 전송될지, 프린터로 찍힐지 
+  그게 아니면 아무 상관없는 로직이 수행될지 알 수 없습니다.
+  이렇게 외부에서 로직을 주입하는 것을 의존성 주입이라고 합니다.
+- <span style="color:red"></span><br>
+- <span style="color:red"></span><br>
+- <span style="color:red"></span><br>
+- <span style="color:red"></span><br>
+- <span style="color:red"></span><br>
 - 
 
 
@@ -342,3 +351,7 @@ func (s *Student) String() string {
 ### <span style="color:red">※ </span>
 <pre><code>
 </code></pre>
+
+
+
+  [link_ij]:https://google.com
