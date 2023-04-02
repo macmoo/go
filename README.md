@@ -51,7 +51,7 @@
   GO모듈생성 => go mod init [패키지명]<br>
   go mod tidy 명령은 Go 모듈에 필요한 패키지를 찾아서 다운로드해주고 필요한 패키지 정보를<br>
   go.mod 파일과 go.sum 파일에 적어준다.
-- ※ 메모리정렬<br>
+- <span style="color:yellow">※ 메모리정렬</span><br>
   레지스터는 실제 연산에 사용되는 데이터가 저장되는 곳.<br>
   레지스터 크기가 4바이트인 컴퓨터를 32비트 컴퓨터라 부르고<br>
   레지스터 크기가 8바이트인 컴퓨터를 64비트 컴퓨터라고 함.(한 번에 8바이트 크기를 연산가능)<br>
@@ -62,7 +62,7 @@
   이 경우 100번지가 아니라 8의 배수인 104번지에 할당.<br>
   메모리 정렬을 위해서 필드 사이에 공간을 띄우는 것을 메모리 패딩Memory Padding이라고 합니다<br>
   참고로 4바이트 변수의 시작 주소는 4의 배수로 맞추고 2바이트 변수의 시작 주소는 2의 배수로 맞춰서 패딩
-- 배열은 처음 배열을 만들 때 정한 길이에서 더 이상 늘어나지 않는다.<br>
+- <span style="color:yellow">배열</span>은 처음 배열을 만들 때 정한 길이에서 더 이상 늘어나지 않는다.<br>
   슬라이스는 배열과 비슷하지만 [ ] 안에 배열의 개수를 적지 않고 선언합니다.<br>
   배열 : var array [10]int<br>
   슬라이스 : var slice []int
@@ -99,17 +99,23 @@
   그래서 인터페이스를 사용할 때 항상 인터페이스값이 nil이 아닌지 확인해야 한다.
 - 인터페이스뿐만 아니라 nil값을 기본으로 갖는 다른 타입 변수 역시 사용하기 전에 값이 nil인지 확인해야 한다.<br>
   기본값을 nil로 갖는 타입은 포인터, 인터페이스, 함수 타입, 슬라이스, 맵, 채널 등이 있다.
-- defer 지연 실행<br>
+- <span style="color:yellow">defer 지연 실행</span><br>
   이와 같이 적으면 명령문이 바로 실행되는 게 아닌 해당 함수가 종료되기 직전에 실행되도록 지연된다.<br>
   명령문은 한 줄의 코드로 일반적으로 함수 호출을 사용<br>
   defer는 역순으로 호출됨
-- 함수 타입은 함수명과 함수 코드 블록을 제외한 함수 정의function signature로 표시<br>
+- <span style="color:yellow">함수 타입</span><br>
+  함수 타입은 함수명과 함수 코드 블록을 제외한 함수 정의function signature로 표시<br>
   별칭 : type opFunc func (int, int) int<br>
-         func getOperator(op string) opFunc
+  &emsp;&emsp;&emsp;func getOperator(op string) opFunc
   함수 정의에서 매개변수명은 적어도 되고 적지 않아도 됨.
-- 함수 리터럴function literal은 이름 없는 함수로 함수명을 적지 않고 함수 타입 변숫값으로 대입되는 함숫값을 의미.<br>
+- <span style="color:yellow">함수 리터럴function literal</span><br>
+  이름 없는 함수로 함수명을 적지 않고 함수 타입 변숫값으로 대입되는 함숫값을 의미.<br>
   함수명이 없기 때문에 함수명으로 직접 함수를 호출할 수 없고 함수 타입변수로만 호출됨.<br>
   다른 프로그래밍 언어에서는 익명 함수 또는 람다Lambda라고 부름.
+  함수 리터럴은 필요한 변수를 내부 상태로 가질 수 있다. 함수 리터럴 내부에서 사용되는 외부 변수는 자동으로 함수 내부 상태로 저장된다.
+  함수 리터럴에서 외부 변수를 내부 상태로 가져올 때 값 복사가 아닌 인스턴스 참조로 가져오게 됩니다. 포인터 형태로 가져온다고 보면 됨.
+- <span style="color:yellow">캡쳐capture</span><br>
+  함수 리터럴 외부 변수를 내부 상태로 가져오는 것을 캡쳐capture라고 한다. 캡쳐는 값 복사가 아닌 참조 형태로 가져오게 되니 주의해야 한다.
 - 
 - 
 
@@ -177,15 +183,14 @@
 <br>
 
 # ■ 메모
-### ※ 포인터가 유효한 메모리 주소를 가리키는지 검사하는 구문<br>
 
+### <span style="color:red">※ 포인터가 유효한 메모리 주소를 가리키는지 검사하는 구문</span>
 <pre><code>var p *int
 if p != nil {
   // p가 nil이 아니라는 얘기는 p가 유효한 메모리 주소를 가리킨다는 뜻입니다.
 }</code></pre>
 
-### ※ <red>포인터변수 초기화</red>
-
+### <span style="color:red">※ 포인터변수 초기화</span>
 <pre><code>p1 := &Data{}             // 1 &를 사용하는 초기화
 var p2 = new(Data)        // 2 new()를 사용하는 초기화
 // new() 내장 함수는 인수로 타입을 받습니다. 타입을 메모리에 할당하고 기본값으로 채워 그 주소를 반환.
@@ -193,14 +198,14 @@ var p2 = new(Data)        // 2 new()를 사용하는 초기화
 // 2 방식은 new를 이용해서 내부 필드값을 원하는 값으로 초기화할 수는 없다.
 </code></pre>
 
-### ※ string 구조
+### <span style="color:red">※ string 구조</span>
 <pre><code>type StringHeader struct {
      Data   uintptr
      Len    int
 }
 </code></pre>
 
-### ※ package
+### <span style="color:red">※ package</span>
 <pre><code>import (
   "text/template"                     // template 패키지
   htemplate "html/template"           // 별칭 htemplate
@@ -208,7 +213,7 @@ var p2 = new(Data)        // 2 new()를 사용하는 초기화
 )
 </code></pre>
 
-### ※ 슬라이스
+### <span style="color:red">※ 슬라이스</span>
 <pre><code>// ---------------------------------
 // 슬라이스 초기화
 // ---------------------------------
@@ -243,7 +248,7 @@ for i, v := range slice { // 2 각 요소에 2 곱하기
 // ---------------------------------
 </code></pre>
 
-### ※ 슬라이스 내부 구조
+### <span style="color:red">※ 슬라이스 내부 구조</span>
 <pre><code>type SliceHeader struct {
     Data  uintptr // 실제 배열을 가리키는 포인터
     Len   int     // 요소 개수
@@ -251,7 +256,7 @@ for i, v := range slice { // 2 각 요소에 2 곱하기
 }
 </code></pre>
 
-### ※ 리시버
+### <span style="color:red">※ 리시버</span>
 <pre><code>// (r Rabbit) 부분이 리시버.
 // 리서버 덕분에 info() 메서드가 Rabbit 타입에 속한다는 것을 알 수 있다.
 // 이때 구조체 변수(r)는 해당 메서드에서 매개변수처럼 사용된다.
@@ -263,7 +268,7 @@ func (r Rabbit) info() int {
 }
 </code></pre>
 
-### ※ 인터페이스
+### <span style="color:red">※ 인터페이스</span>
 <pre><code>// 인터페이스 선언은 1 type을 쓴 뒤 2 인터페이스명을 쓰고 3 interface 키워드를 씁니다.
 // 그런 뒤 중괄호 4 { } 블록 안에 인터페이스에 포함된 메서드 집합을 써줍니다
 type DuckInterface interface {
@@ -271,7 +276,7 @@ type DuckInterface interface {
     Walk(distance int) int
 }
 </code></pre>
-### ※ 인터페이스 변환
+### <span style="color:red">※ 인터페이스 변환</span>
 <pre><code>// 1. 구체화된 다른 타입으로 타입 변환하기
 //    사용 방법은 인터페이스 변수 뒤에 점 .을 찍고 소괄호 () 안에 변경하려는 타입을 써주면 됩니다.
 var a Interface
@@ -295,7 +300,7 @@ t, ok := a.(ConcreteType)
 // ok : 변환 성공 여부
 </code></pre>
 
-### ※ 덕 타이핑
+### <span style="color:red">※ 덕 타이핑</span>
 <pre><code>// Go 언어에서는 어떤 타입이 인터페이스를 포함하고 있는지 여부를 결정할 때 덕 타이핑duck typing방식을 사용합니다.
 //덕 타이핑 방식이란 타입 선언 시 인터페이스 구현 여부를 명시적으로 나타낼 필요 없이 인터페이스에 정의한 메서드 포함 여부만으로 결정하는 방식.
 // 인터페이스 정의
@@ -312,7 +317,7 @@ func (s *Student) String() string {
 }
 </code></pre>
 
-### ※ Print()
+### <span style="color:red">※ Print()</span>
 <pre><code>func Print(args ...interface{}) string { // 1 모든 타입을 받는 가변 인수
     // 2 모든 인수 순회
     for _, arg := range args {
@@ -334,6 +339,6 @@ func (s *Student) String() string {
 }
 </code></pre>
 
-### ※ 
+### <span style="color:red">※ </span>
 <pre><code>
 </code></pre>
