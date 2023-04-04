@@ -21,23 +21,28 @@ func (q *Queue) Pop() interface{} {
 	return nil
 }
 
+func (q *Queue) Size() int {
+	return q.v.Len()
+}
+
 func NewQueue() *Queue {
 	return &Queue{list.New()}
 }
 
 func main() {
-
-	queue := NewQueue()
-
+	q := NewQueue()
 	for i := 0; i < 5; i++ {
-		queue.Push(i)
+		q.Push(i)
 	}
 
-	v := queue.Pop()
+	fmt.Println("BEFORE::Queue Size:", q.Size())
 
-	fmt.Println("---------------------------------")
+	v := q.Pop()
 	for v != nil {
 		fmt.Printf("%v -> ", v)
-		v = queue.Pop()
+		v = q.Pop()
 	}
+	fmt.Println("\nAFTER::Queue Size:", q.Size())
 }
+
+// fmt.Println("---------------------------------")
