@@ -520,7 +520,7 @@ func (s *Student) String() string {
 ||https://dev.classmethod.jp/articles/golang-grpc-sample-project/|
 ||https://lejewk.github.io/grpc-go-example/|
 ||https://devjin-blog.com/golang-grpc-server-1/|
-||https://github.com/dojinkimm/go-grpc-example|
+|*|https://github.com/dojinkimm/go-grpc-example|
 |||
 |||
 |||
