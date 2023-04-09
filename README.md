@@ -157,7 +157,8 @@
 - <span style="color:red">해시 함수</span></br>
   해시 함수는 요소 개수와 상관없이 고정된 시간을 갖는 함수이기 때문에 해시 함수를 사용하는 맵이 읽기, 쓰기에서 O(1)의 시간값을 갖게됨.</br>
   또 키가 크다고 해시 함수 결괏값이 커지는 게 아니기 때문에 맵은 키와 무관하고 입력 순서와도 무관한 순서로 순회하게 됨.
-- <span style="color:red"></span></br>
+- 배열은 연속된 메모리를 사용하고 리스트는 불연속 메모리를 사용.</br>
+  리스트는 요소 추가와 삭제 속도가 O(1)입니다. 배열에 비해서 빠르다.
 - <span style="color:red"></span></br>
 - <span style="color:red"></span></br>
 - <span style="color:red"></span></br>
@@ -221,7 +222,7 @@
 
 </br>
 
-# 표준 입력
+# 표준 함수
 |함수명|설명|
 |---|---|
 |Scan()|표준 입력에서 값을 입력받습니다.|
@@ -233,6 +234,15 @@
 |func (t Time) UnixNano() int64|int64값으로 변환|
 |func copy(dst, src []Type) int|복사|
 |make()|첫 번째 인수로 만들고자 하는 타입을 적어줍니다. 두 번째 인수로 길이|
+|rd := bufio.NewReader(file)|bufio.Reader 객체생성|
+|line, _ := rd.ReadString('\n')|bufio.Reader 객체는 구분자까지 문자열을 읽어오는 ReadString() 메서드를 가짐|
+|os.Create()|파일생성|
+|os.Open()|파일OPEN|
+|fmt.Fprintln()||
+|||
+|||
+|||
+|||
 |||
 |||
 
@@ -454,4 +464,64 @@ func (s *Student) String() string {
 </code></pre>
 
 
-  [link_ij]:https://github.com/macmoo/go/blob/main/root2303/20230402_03_internal_state.go
+# ■ redis
+- key, value의 비정형 데이터를 저장해놓는 nosql입니다.</br>
+  RDB는 parser, 전처리기, 옵티마이저를 타고 디스크까지 접근하므로 느리지만</br>
+  redis(remote dictionary server)는 서버의 메모리에서 동작하며</br>
+  조회 정책을 기본적으로 해시테이블방식을 사용하므로(시간복잡도가 O(1)) 빠릅니다.</br>
+  대신 정규화가 불가능해 RDB에 비해 확장에 불리합니다.</br>
+  만료시간이 있는 데이터를 저장하거나, 확장될 여지가 없는 데이터셋을 저장할때 주로 사용됩니다.</br>
+  (redis는 리모트 서버의 인메모리에서 동작하지만 서버가 내려갔을때 데이터 영속성을 위해</br>
+  AOF와 RDB방식을 제공한다는 특징이 있습니다.
+
+</br>
+
+# ■ Redis 참조
+|||
+|---|---|
+|Hiredis|http://www.redisgate.com/redis/clients/hiredis_intro.php|
+|참고|https://github.com/jaeho310/go-redis-client|
+|windows 설치|https://github.com/microsoftarchive/redis|
+|환경설정|https://pamyferret.tistory.com/9|
+|redis api doc|https://pkg.go.dev/github.com/go-redis/redis/v8|
+|redis sample|https://redis.uptrace.dev/guide/go-redis.html#connecting-to-redis-server|
+|redis sample|https://qiita.com/momotaro98/items/ed496ba06908b278e103|
+|redis sentine|https://redis.uptrace.dev/guide/go-redis-sentinel.html|
+|redis test|https://frozenpond.tistory.com/164|
+|Redisデータ操作|https://www.wakuwakubank.com/posts/736-server-redis-cli/#index_id6|
+
+</br>
+
+# ■ gRPC
+- google 에서 만든 오픈소스로, 원격지의 프로시저를 호출하는 프레임워크 입니다.
+- 원격지 프로시저를 수행하는 규칙 및 파라미터 전달을 위한 인터페이스로 protocol buffer 라는 오픈소스를 활용.
+- Blocking & Non-Blocking 을 지원합니다.
+- HTTP/2 프로토콜을 사용합니다.
+- 인증, 로드벨런싱, 트레이싱, 헬스체크 등을 제공합니다.
+- 10개 언어에서 지원되는 라이브러리가 있습니다.
+- gRPC 사용 및 흐름
+  1. 실행하고자 하는 프로시저와, 전달하고자 하는 파라미터 사양을 .proto 파일로 작성합니다.</br>
+  2. protoc 를 통해 사용하고자 하는 언어에 맞게 stub 파일을 생성합니다.</br>
+     생성된 파일은 각 클라이언트가 참조할 수 있는 언어(.java .c .go 등..) 로써 bean 과 같이 데이터를 엑세스 하거나 핸들링하는 함수가 포함되어 있습니다.</br>
+  3. gRPC 에서 각 언어별로 제공하는 SDK 를 제공합니다. 이를 활용해 서버, 클라이언트를 프로그래밍 합니다.</br>
+  4. stub 을 활용해 실행될 프로시저를 구현하거나 전달할 파라미터를 생산할수 있습니다.
+- .proto 와 stub 파일</br>
+  protocol buffer 를 사용하는 이점중 하나는</br>
+  .proto 파일로 구조화된 데이터를 작성하기만 한다면 gRPC가 지원하는 어떤 언어에서든 규약에 상관없이 통신이 가능하다는 것.</br>
+  작성된 .proto 로부터 언어에 맞는 stub 를 생산하여 참조하게 되면 이후 별도의 사양서를 볼 필요없이 참조한 stub 만으로도 개발이 가능.
+
+
+</br>
+
+# ■ gRPC 참조
+|||
+|---|---|
+|참조|https://etloveguitar.tistory.com/107|
+||https://dev.classmethod.jp/articles/golang-grpc-sample-project/|
+||https://lejewk.github.io/grpc-go-example/|
+||https://devjin-blog.com/golang-grpc-server-1/|
+||https://github.com/dojinkimm/go-grpc-example|
+|||
+|||
+|||
+|||
