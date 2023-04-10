@@ -159,7 +159,11 @@
   또 키가 크다고 해시 함수 결괏값이 커지는 게 아니기 때문에 맵은 키와 무관하고 입력 순서와도 무관한 순서로 순회하게 됨.
 - 배열은 연속된 메모리를 사용하고 리스트는 불연속 메모리를 사용.</br>
   리스트는 요소 추가와 삭제 속도가 O(1)입니다. 배열에 비해서 빠르다.
-- <span style="color:red"></span></br>
+- <span style="color:red">고루틴</span></br>
+  고루틴goroutine은 Go 언어에서 관리하는 경량 스레드</br>
+   함수나 명령을 동시에 수행할 때 사용. 여러 고루틴을 갖는 프로그램을 코딩하는 것을 동시성프로그래밍Concurrent Programming이라고 한다.</br>
+   스레드의 명령 포인터instruction pointer, 스택 메모리 등의 정보를 저장하게 되는데 이를 스레드 컨텍스트thread context라고 합니다.</br>
+   Go 언어에서는 CPU 코어마다 OS 스레드를 하나만 할당해서 사용하기 때문에 컨텍스트 스위칭 비용이 발생하지 않는다.
 - <span style="color:red"></span></br>
 - <span style="color:red"></span></br>
 - 
