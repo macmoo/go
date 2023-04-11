@@ -180,7 +180,9 @@
   채널channel이란 고루틴끼리 메시지를 전달할 수 있는 메시지 큐.
   생성:</br>
   var messages chan string = make(chan string)</br>
-  var 채널인스턴스변수 채널타입 = make(채널키워드 메시지타입)
+  var 채널인스턴스변수 채널타입 = make(채널키워드 메시지타입)</br>
+  일반적으로 채널을 생성하면 크기가 0인 채널1이 만들어진다.</br>
+  
 
 - <span style="color:red"></span></br>
 - <span style="color:red"></span></br>
