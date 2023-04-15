@@ -1,3 +1,9 @@
+# 진척
+- 20230410_x2_error_type.go</br>
+  23.2 => page491
+- 20230413_01_xx.go</br>
+  25.1.8 => page541
+
 # GO
 
 |제목|내용|
@@ -182,9 +188,13 @@
   var messages chan string = make(chan string)</br>
   var 채널인스턴스변수 채널타입 = make(채널키워드 메시지타입)</br>
   일반적으로 채널을 생성하면 크기가 0인 채널1이 만들어진다.</br>
-  
-
-- <span style="color:red"></span></br>
+- 고루틴에서 뮤텍스를 사용하지 않는 방법</br>
+  첫 번째 방법인 영역을 나누는 방법</br>
+  두 번째 방법인 채널을 이용해서 역할을 나눔.
+- <span style="color:red">생산자 소비자 패턴</span></br>
+  데이터를 생성해서 넣어주면 다른 쪽에서 생성된 데이터를 빼서 사용하는 방식을 생산자 소비자 패턴Producer Consumer Pattern이라고 합니다
+- <span style="color:red">컨텍스트</span></br>
+  컨텍스트context는 context 패키지에서 제공하는 기능으로 작업을 지시할 때 작업 가능 시간, 작업 취소 등의 조건을 지시할 수 있는 작업 명세서 역할을 합니다
 - <span style="color:red"></span></br>
 - <span style="color:red"></span></br>
 - 
@@ -265,9 +275,16 @@
 |os.Create()|파일생성|
 |os.Open()|파일OPEN|
 |fmt.Fprintln()||
-|||
-|||
-|||
+|time.Tick()|일정 시간 간격 주기로 신호를 보내주는 채널을 생성해서 반환하는 함수|
+|time.After()|현재 시간 이후로 일정 시간 경과 후에 신호를 보내주는 채널을 생성해서 반환하는 함수|
+|var wg sync.WaitGroup||
+|wg.Add(3)||
+|wg.Wait()||
+|wg.Done()||
+|context.Background()||
+|context.WithCancel(ctx) ||
+|context.WithTimeout(ctx, 시간)||
+|ontext.WithValue(Ctx, "number", 9)||
 |||
 |||
 |||
