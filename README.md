@@ -1,8 +1,8 @@
 # 진척
-- 20230410_x2_error_type.go</br>
+- 20230410_x2_error_type.go
   23.2 => page491
-- 20230413_01_xx.go</br>
-  25.1.8 => page541
+
+</br>
 
 # GO
 
@@ -14,6 +14,47 @@
 |패키지설명|https://qiita.com/fetaro/items/31b02b940ce9ec579baf|
 |GIT|https://github.com/macmoo/go|
 |||
+
+</br>
+
+# 표준 함수
+|pkg|함수명|설명|
+|---|---|---|
+|builtin  |make()|첫 번째 인수로 만들고자 하는 타입을 적어줍니다. 두 번째 인수로 길이|
+|         |func copy(dst, src []Type) int|복사|
+|bufio    |rd := bufio.NewReader(file)|bufio.Reader 객체생성|
+|         |scanner := bufio.NewScanner(file)|스캐너 생성|
+|         |line := scanner.Text()|한줄씩 read|
+|         |line, _ := rd.ReadString('\n')|bufio.Reader 객체는 구분자까지 문자열을 읽어오는 ReadString() 메서드를 가짐|
+|os       |os.Create()|파일생성|
+|         |func Open(name string) (*File, error)|파일을 읽기 전용으로 열고 *File 타입인 파일 핸들 객체를 반환|
+|fmt      |fmt.Fprintln()||
+|         |Scan()|표준 입력에서 값을 입력받습니다.|
+|         |Scanf()|표준 입력에서 서식 형태로 값을 입력받습니다.|
+|         |Scanln()|표준 입력에서 한 줄을 읽어서 값을 입력받습니다.|
+|rand     |func Intn(n int) int|랜덤한 숫자|
+|         |func Seed(seed int64)|랜덤 시드 설정|
+|         |rand.Seed(time.Now().UnixNano())|랜덤시드설정|
+|time     |time.Tick()|일정 시간 간격 주기로 신호를 보내주는 채널을 생성해서 반환하는 함수|
+|         |time.After()|현재 시간 이후로 일정 시간 경과 후에 신호를 보내주는 채널을 생성해서 반환하는 함수|
+|         |func Now() Time|현재 시각|
+|         |func (t Time) UnixNano() int64|int64값으로 변환|
+|sync     |var wg sync.WaitGroup||
+|         |wg.Add(3)||
+|         |wg.Wait()||
+|         |wg.Done()||
+|context  |context.Background()||
+|         |context.WithCancel(ctx) ||
+|         |context.WithTimeout(ctx, 시간)||
+|         |ontext.WithValue(Ctx, "number", 9)||
+|filepath |func Glob(pattern string) (matches []string, err error)|파일 경로에 해당하는 파일 목록을 가져옴|
+|         |filespaths, err := filepath.Glob("*.txt")|현재 실행 폴더 내 확장자가 txt인 모든 파일 리스트를 반환|
+|strings  |strings.Contains(s, substr string) bool|첫 번째 인수인 s 안에 두 번째 인수인 substr이 포함되어 있는지 여부를 반환하는 함수|
+||||
+||||
+||||
+||||
+||||
 
 </br>
 
@@ -66,7 +107,7 @@
   GO모듈생성 => go mod init [패키지명]</br>
   go mod tidy 명령은 Go 모듈에 필요한 패키지를 찾아서 다운로드해주고 필요한 패키지 정보를</br>
   go.mod 파일과 go.sum 파일에 적어준다.
-- <span style="color:red">※ 메모리정렬</span></br>
+- <r>※ 메모리정렬</r></br>
   레지스터는 실제 연산에 사용되는 데이터가 저장되는 곳.</br>
   레지스터 크기가 4바이트인 컴퓨터를 32비트 컴퓨터라 부르고</br>
   레지스터 크기가 8바이트인 컴퓨터를 64비트 컴퓨터라고 함.(한 번에 8바이트 크기를 연산가능)</br>
@@ -77,7 +118,7 @@
   이 경우 100번지가 아니라 8의 배수인 104번지에 할당.</br>
   메모리 정렬을 위해서 필드 사이에 공간을 띄우는 것을 메모리 패딩Memory Padding이라고 합니다</br>
   참고로 4바이트 변수의 시작 주소는 4의 배수로 맞추고 2바이트 변수의 시작 주소는 2의 배수로 맞춰서 패딩
-- <span style="color:red">배열</span>은 처음 배열을 만들 때 정한 길이에서 더 이상 늘어나지 않는다.</br>
+- <r>배열</r>은 처음 배열을 만들 때 정한 길이에서 더 이상 늘어나지 않는다.</br>
   슬라이스는 배열과 비슷하지만 [ ] 안에 배열의 개수를 적지 않고 선언합니다.</br>
   배열 : var array [10]int</br>
   슬라이스 : var slice []int
@@ -114,43 +155,43 @@
   그래서 인터페이스를 사용할 때 항상 인터페이스값이 nil이 아닌지 확인해야 한다.
 - 인터페이스뿐만 아니라 nil값을 기본으로 갖는 다른 타입 변수 역시 사용하기 전에 값이 nil인지 확인해야 한다.</br>
   기본값을 nil로 갖는 타입은 포인터, 인터페이스, 함수 타입, 슬라이스, 맵, 채널 등이 있다.
-- 인수 타입 앞에 마침표 3개 ...를 찍어서 <span style="color:red">가변 인수</span>를 표현
-- <span style="color:red">defer 지연 실행</span></br>
+- 인수 타입 앞에 마침표 3개 ...를 찍어서 <r>가변 인수</r>를 표현
+- <r>defer 지연 실행</r></br>
   이와 같이 적으면 명령문이 바로 실행되는 게 아닌 해당 함수가 종료되기 직전에 실행되도록 지연된다.</br>
   명령문은 한 줄의 코드로 일반적으로 함수 호출을 사용</br>
   defer는 역순으로 호출됨
-- <span style="color:red">함수 타입</span></br>
+- <r>함수 타입</r></br>
   함수 타입은 함수명과 함수 코드 블록을 제외한 함수 정의function signature로 표시</br>
   별칭 : type opFunc func (int, int) int</br>
   &emsp;&emsp;&emsp;func getOperator(op string) opFunc
   함수 정의에서 매개변수명은 적어도 되고 적지 않아도 됨.
-- <span style="color:red">함수 리터럴function literal</span></br>
+- <r>함수 리터럴function literal</r></br>
   이름 없는 함수로 함수명을 적지 않고 함수 타입 변숫값으로 대입되는 함숫값을 의미.</br>
   함수명이 없기 때문에 함수명으로 직접 함수를 호출할 수 없고 함수 타입변수로만 호출됨.</br>
   다른 프로그래밍 언어에서는 익명 함수 또는 람다Lambda라고 부름.
   함수 리터럴은 필요한 변수를 내부 상태로 가질 수 있다. 함수 리터럴 내부에서 사용되는 외부 변수는 자동으로 함수 내부 상태로 저장된다.
   함수 리터럴에서 외부 변수를 내부 상태로 가져올 때 값 복사가 아닌 인스턴스 참조로 가져오게 됩니다. 포인터 형태로 가져온다고 보면 됨.
-- <span style="color:red">캡쳐capture</span></br>
+- <r>캡쳐capture</r></br>
   함수 리터럴 외부 변수를 내부 상태로 가져오는 것을 캡쳐capture라고 한다. 캡쳐는 값 복사가 아닌 참조 형태로 가져오게 되니 주의해야 한다.
-- <span style="color:red">의존성 주입</span>&emsp;[link][link_ij]</br>
+- <r>의존성 주입</r>&emsp;[link][link_ij]</br>
   writeHello() 함수 입장에서 생각해보겠습니다. writeHello()는 인수로 Writer 함수 타입을 받습니다.</br>
   writeHello() 함수 입장에서 보면 인수로 온 writer를 호출했을 때 그게 파일에 씌여질지 네트워크로 전송될지, 프린터로 찍힐지 그게 아니면 아무 상관없는 로직이 수행될지 알 수 없다.</br>
   이렇게 외부에서 로직을 주입하는 것을 의존성 주입이라고 합니다.
-- <span style="color:red">dependency injection</span></br>
+- <r>dependency injection</r></br>
   dependency injection. 꼭 함수 리터럴로만 할 수 있는 건 아닙니다. 인터페이스를 통해서도 구현할 수 있습니다.</br>
   외부에서 로직을 주입하는 형태로 구현된다는 것이 중요합니다.
-- <span style="color:red">리스트list</span></br>
+- <r>리스트list</r></br>
   배열과 가장 큰 차이점은 배열은 연속된 메모리에 데이터를 저장하는 반면, 리스트는 불연속된 메모리에 데이터를 저장한다는 점.
-- <span style="color:red">데이터 지역성</span></br>
+- <r>데이터 지역성</r></br>
   데이터 지역성data locality은 데이터가 밀집한 정도를 말합니다. 데이터 로컬리티라고도 한다.
   배열과 리스트를 선택할 때 데이터 지역성을 고려해야 합니다. 컴퓨터는 연산할 때 읽어온 데이터를 캐시라는 임시 저장소에 보관.
   이때 정확히 필요한 데이터만 가져오는 게 아니라 그 주변 데이터를 같이 가져온다. 그 이유는 보통 연산이 일어난 다음에 높은 확률로 주변 데이터에 대한 연산이 이어지기 때문.
   그래서 필요한 데이터가 인접해 있을수록 처리 속도가 빨라지는데, 이를 데이터 지역성이좋다고 말한다.
   배열은 연속된 메모리로 이뤄진 자료구조이고 리스트는 불연속이기 때문에 배열이 리스트에 비해서 데이터 지역성이 월등하게 좋다.
   그래서 삽입과 삭제가 빈번하면 리스트가 배열보다 좋다고 말하지만, 요소 수가 적으면 데이터 지역성 때문에 오히려 배열이 리스트보다 더 효율적입니다. 삽입 삭제가 빈번할 때요소 수에 따른 배열과 리스트 선택은 컴퓨터 성능과 프로그램 성격에 따라 다르다.
-- <span style="color:red">ring</span></br>
+- <r>ring</r></br>
   링은 저장할 개수가 고정되고, 오래된 요소는 지워도 되는 경우에 적합
-- <span style="color:red">map</span></br>
+- <r>map</r></br>
   맵map은 키와 값 형태로 데이터를 저장하는 자료구조. 언어에 따라 딕셔너리dictionary, 해시테이블hash table, 해시맵hash map 등으로 부른다. Go 언어에서는 맵이라고 부른다.<br>
   맵은 리스트나 링과 달리 container 패키지가 아닌 Go 기본 내장 타입</br>
   생성 : map[key]value  => map[키타입]값타입</br>
@@ -160,28 +201,28 @@
   맵은 반환값을 하나 혹은 둘로 받을 수 있다.</br>
   반환값을 하나만 받으면 값을 반환하고, 둘로 받으면 값뿐 아니라 요소가 존재하는지 알려주는 불리언도 반환.</br>
   반환 : v, ok := m[3] => 값, 존재여부 := m[3]
-- <span style="color:red">해시 함수</span></br>
+- <r>해시 함수</r></br>
   해시 함수는 요소 개수와 상관없이 고정된 시간을 갖는 함수이기 때문에 해시 함수를 사용하는 맵이 읽기, 쓰기에서 O(1)의 시간값을 갖게됨.</br>
   또 키가 크다고 해시 함수 결괏값이 커지는 게 아니기 때문에 맵은 키와 무관하고 입력 순서와도 무관한 순서로 순회하게 됨.
 - 배열은 연속된 메모리를 사용하고 리스트는 불연속 메모리를 사용.</br>
   리스트는 요소 추가와 삭제 속도가 O(1)입니다. 배열에 비해서 빠르다.
-- <span style="color:red">고루틴</span></br>
+- <r>고루틴</r></br>
   고루틴goroutine은 Go 언어에서 관리하는 경량 스레드</br>
   함수나 명령을 동시에 수행할 때 사용. 여러 고루틴을 갖는 프로그램을코딩하는 것을 동시성프로그래밍Concurrent Programming이라고 한다.</br>
   스레드의 명령 포인터instruction pointer, 스택 메모리 등의 정보를저장하게 되는데 이를 스레드 컨텍스트thread context라고 합니다.</br>
   Go 언어에서는 CPU 코어마다 OS 스레드를 하나만 할당해서 사용하기 때문에컨텍스트 스위칭 비용이 발생하지 않는다.
   고루틴 생성 => go 함수_호출</br>
   go 키워드를 쓰고 함수를 호출하면 해당 함수를 수행하는 새로운 고루틴을생성.</br>호출된함수는 현재 고루틴이 아니라 새로운 고루틴에서 수행된다.
-- <span style="color:red">시스템 콜</span></br>
+- <r>시스템 콜</r></br>
   시스템 콜이란 운영체제가 지원하는 서비스를 호출할 때를 말합니다. 대표적으로 네트워크 기능등이 있습니다. 시스템 콜을 호출하면 운영체제에서 해당 서비스가 완료될 때까지 대기해야 합니다. 예를 들어 네트워크로 데이터를 읽을 때는 데이터가 들어올 때까지 대기 상태가 됩니다.</br>
   컨텍스트 스위칭은 CPU 코어가 스레드를 변경할 때 발생하는데 고루틴을 이용하면 코어와 스레드는 변경되지 않고 오직 고루틴만 옮겨 다니기 때문입니다. 즉, 코어가 스레드를 변경하지 않기 때문에 컨텍스트 스위칭 비용이 발생하지 않습니다.
-- <span style="color:red">뮤텍스</span></br>
+- <r>뮤텍스</r></br>
   한 번 획득한 뮤텍스는 반드시 Unlock()을 호출해서 반납해야 한다.</br>
   뮤텍스는 동시에 고루틴 하나만 확보할 수 있습니다
-- <span style="color:red">뮤텍스의 문제점</span></br>
+- <r>뮤텍스의 문제점</r></br>
   첫 번째 문제는 동시성 프로그래밍으로 얻는 성능 향상을 얻을 수 없다는 점입니다. 뮤텍스는 오직 하나의 고루틴만 공유 자원에 접근할 수 있도록 제한합니다. 따라서 여러 고루틴 중 뮤텍스를획득한 고루틴만 실행됩니다. 성능을 향상시키려고 동시성 프로그램을 구현했지만 성능 향상을 얻지 못하는 아이러니한 문제가 생기게 됩니다.</br>
   두 번째 문제는 데드락이 발생할 수 있다는 점입니다.
-- <span style="color:red">채널</span></br>
+- <r>채널</r></br>
   채널channel과 컨텍스트context는 Go 언어에서 동시성 프로그래밍을 도와주는 기능입니다. 채널은 고루틴 간 메시지를 전달하는 메시지 큐입니다. 채널을 사용하면 뮤텍스 없이 동시성 프로그래밍이 가능합니다. 컨텍스트는 고루틴에 작업을요청할 때 작업 취소나 작업 시간 등을 설정할 수 있는 작업 명세서 역할을 합니다. 채널과 컨텍스트를 사용해 특정 데이터를 전달하거나 특정 시간 동안만 작업을 요청하거나 작업 도중에 작업 취소를 요청할 수 있습니다.</br>
   채널channel이란 고루틴끼리 메시지를 전달할 수 있는 메시지 큐.
   생성:</br>
@@ -191,12 +232,12 @@
 - 고루틴에서 뮤텍스를 사용하지 않는 방법</br>
   첫 번째 방법인 영역을 나누는 방법</br>
   두 번째 방법인 채널을 이용해서 역할을 나눔.
-- <span style="color:red">생산자 소비자 패턴</span></br>
+- <r>생산자 소비자 패턴</r></br>
   데이터를 생성해서 넣어주면 다른 쪽에서 생성된 데이터를 빼서 사용하는 방식을 생산자 소비자 패턴Producer Consumer Pattern이라고 합니다
-- <span style="color:red">컨텍스트</span></br>
+- <r>컨텍스트</r></br>
   컨텍스트context는 context 패키지에서 제공하는 기능으로 작업을 지시할 때 작업 가능 시간, 작업 취소 등의 조건을 지시할 수 있는 작업 명세서 역할을 합니다
-- <span style="color:red"></span></br>
-- <span style="color:red"></span></br>
+- <r></r></br>
+- <r></r></br>
 - 
 
 </br>
@@ -209,8 +250,8 @@
 |요소 삭제|O(N)|O(1)|
 인덱스 요소 접근|O(1)|O(N)
 
-* 인덱스를 활용한 접근에서는 배열이, 인덱스를 사용한 접근이 거의 없고 삽입과 삭제가 빈번하게 일어나면 리스트가 더 빠릅니다.
-* 출력값이 맨 앞에서 발생하기 때문에 배열로 만들면 요소를 빼낼 때마다 O(N) 성능이 필요.</br>
+- 인덱스를 활용한 접근에서는 배열이, 인덱스를 사용한 접근이 거의 없고 삽입과 삭제가 빈번하게 일어나면 리스트가 더 빠릅니다.
+- 출력값이 맨 앞에서 발생하기 때문에 배열로 만들면 요소를 빼낼 때마다 O(N) 성능이 필요.</br>
   반면 리스트로 만들면 O(1) 성능을 보장하기 때문에 더 빠르게 처리할 수 있어서 리스트가 큐를 만들 때 더 효율적이다.
 
 </br>
@@ -257,40 +298,6 @@
 
 </br>
 
-# 표준 함수
-|함수명|설명|
-|---|---|
-|Scan()|표준 입력에서 값을 입력받습니다.|
-|Scanf()|표준 입력에서 서식 형태로 값을 입력받습니다.|
-|Scanln()|표준 입력에서 한 줄을 읽어서 값을 입력받습니다.|
-|func Intn(n int) int|랜덤한 숫자|
-|func Seed(seed int64)|랜덤 시드 설정|
-|func Now() Time|현재 시각|
-|func (t Time) UnixNano() int64|int64값으로 변환|
-|rand.Seed(time.Now().UnixNano())|랜덤시드설정|
-|func copy(dst, src []Type) int|복사|
-|make()|첫 번째 인수로 만들고자 하는 타입을 적어줍니다. 두 번째 인수로 길이|
-|rd := bufio.NewReader(file)|bufio.Reader 객체생성|
-|line, _ := rd.ReadString('\n')|bufio.Reader 객체는 구분자까지 문자열을 읽어오는 ReadString() 메서드를 가짐|
-|os.Create()|파일생성|
-|os.Open()|파일OPEN|
-|fmt.Fprintln()||
-|time.Tick()|일정 시간 간격 주기로 신호를 보내주는 채널을 생성해서 반환하는 함수|
-|time.After()|현재 시간 이후로 일정 시간 경과 후에 신호를 보내주는 채널을 생성해서 반환하는 함수|
-|var wg sync.WaitGroup||
-|wg.Add(3)||
-|wg.Wait()||
-|wg.Done()||
-|context.Background()||
-|context.WithCancel(ctx) ||
-|context.WithTimeout(ctx, 시간)||
-|ontext.WithValue(Ctx, "number", 9)||
-|||
-|||
-|||
-
-</br>
-
 # 자료형
 
 |타입|최솟값|최댓값|소수부|
@@ -316,14 +323,14 @@
 
 # ■ 메모
 
-### <span style="color:red">※ 포인터가 유효한 메모리 주소를 가리키는지 검사하는 구문</span>
+### <r>※ 포인터가 유효한 메모리 주소를 가리키는지 검사하는 구문</r>
 
 <pre><code>var p *int
 if p != nil {
   // p가 nil이 아니라는 얘기는 p가 유효한 메모리 주소를 가리킨다는 뜻입니다.
 }</code></pre>
 
-### <span style="color:red">※ 포인터변수 초기화</span>
+### <r>※ 포인터변수 초기화</r>
 
 <pre><code>p1 := &Data{}             // 1 &를 사용하는 초기화
 var p2 = new(Data)        // 2 new()를 사용하는 초기화
@@ -332,7 +339,7 @@ var p2 = new(Data)        // 2 new()를 사용하는 초기화
 // 2 방식은 new를 이용해서 내부 필드값을 원하는 값으로 초기화할 수는 없다.
 </code></pre>
 
-### <span style="color:red">※ string 구조</span>
+### <r>※ string 구조</r>
 
 <pre><code>type StringHeader struct {
      Data   uintptr
@@ -340,7 +347,7 @@ var p2 = new(Data)        // 2 new()를 사용하는 초기화
 }
 </code></pre>
 
-### <span style="color:red">※ package</span>
+### <r>※ package</r>
 
 <pre><code>import (
   "text/template"                     // template 패키지
@@ -349,7 +356,7 @@ var p2 = new(Data)        // 2 new()를 사용하는 초기화
 )
 </code></pre>
 
-### <span style="color:red">※ 슬라이스</span>
+### <r>※ 슬라이스</r>
 
 <pre><code>// ---------------------------------
 // 슬라이스 초기화
@@ -385,7 +392,7 @@ for i, v := range slice { // 2 각 요소에 2 곱하기
 // ---------------------------------
 </code></pre>
 
-### <span style="color:red">※ 슬라이스 내부 구조</span>
+### <r>※ 슬라이스 내부 구조</r>
 
 <pre><code>type SliceHeader struct {
     Data  uintptr // 실제 배열을 가리키는 포인터
@@ -394,7 +401,7 @@ for i, v := range slice { // 2 각 요소에 2 곱하기
 }
 </code></pre>
 
-### <span style="color:red">※ 리시버</span>
+### <r>※ 리시버</r>
 
 <pre><code>// (r Rabbit) 부분이 리시버.
 // 리서버 덕분에 info() 메서드가 Rabbit 타입에 속한다는 것을 알 수 있다.
@@ -407,7 +414,7 @@ func (r Rabbit) info() int {
 }
 </code></pre>
 
-### <span style="color:red">※ 인터페이스</span>
+### <r>※ 인터페이스</r>
 
 <pre><code>// 인터페이스 선언은 1 type을 쓴 뒤 2 인터페이스명을 쓰고 3 interface 키워드를 씁니다.
 // 그런 뒤 중괄호 4 { } 블록 안에 인터페이스에 포함된 메서드 집합을 써줍니다
@@ -416,7 +423,7 @@ type DuckInterface interface {
     Walk(distance int) int
 }
 </code></pre>
-### <span style="color:red">※ 인터페이스 변환</span>
+### <r>※ 인터페이스 변환</r>
 
 <pre><code>// 1. 구체화된 다른 타입으로 타입 변환하기
 //    사용 방법은 인터페이스 변수 뒤에 점 .을 찍고 소괄호 () 안에 변경하려는 타입을 써주면 됩니다.
@@ -441,7 +448,7 @@ t, ok := a.(ConcreteType)
 // ok : 변환 성공 여부
 </code></pre>
 
-### <span style="color:red">※ 덕 타이핑</span>
+### <r>※ 덕 타이핑</r>
 
 <pre><code>// Go 언어에서는 어떤 타입이 인터페이스를 포함하고 있는지 여부를 결정할 때 덕 타이핑duck typing방식을 사용합니다.
 //덕 타이핑 방식이란 타입 선언 시 인터페이스 구현 여부를 명시적으로 나타낼 필요 없이 인터페이스에 정의한 메서드 포함 여부만으로 결정하는 방식.
@@ -459,7 +466,9 @@ func (s *Student) String() string {
 }
 </code></pre>
 
-### <span style="color:red">※ Print()</span>
+</br>
+
+### <r>※ Print()</r>
 
 <pre><code>func Print(args ...interface{}) string { // 1 모든 타입을 받는 가변 인수
     // 2 모든 인수 순회
@@ -482,7 +491,9 @@ func (s *Student) String() string {
 }
 </code></pre>
 
-### <span style="color:red">※ 리스트를 구현하는 구조체 코드</span>
+</br>
+
+### <r>※ 리스트를 구현하는 구조체 코드</r>
 
 <pre><code>type Element struct {     // 1 구조체
     Value   interface{ }  // 2 데이터를 저장하는 필드 (interface{ } 타입이므로 어떤 타입값도 저장가능)
@@ -491,17 +502,86 @@ func (s *Student) String() string {
 }
 </code></pre>
 
-### <span style="color:red">※ </span>
+</br>
+
+### <r>※ 객체지향 설계 5가지 원칙 SOLID</r>
+
+- 단일 책임 원칙single responsibility principle, SRP
+- 개방-폐쇄 원칙open-closed principle, OCP
+- 리스코프 치환 원칙liskov substitution principle, LSP
+- 인터페이스 분리 원칙interface segregation principle, ISP
+- 의존 관계 역전 원칙dependency inversion principle, DIP
+
+<b>나쁜 설계 : ‘상호 결합도가 매우 높고 응집도가 낮은 설계’</b>
+‘상호 결합도가 높다’는 얘기는 모듈이 서로 강하게 결합되어 있어서 떼어낼 수 없다는 뜻입니다. 상호 결합도가 높으면 경직성이 증가되고 그로 인해 한 모듈의 수정이 다른 모듈로 전파되어 예기치 못한 문제가 생기고 코드 재사용성을 낮추게 됩니다. ‘응집도가 낮다’는 얘기는 하나의 모듈이 스스로 자립하지 못한다는 뜻입니다. 즉 하나의 모듈이 스스로 완성되지 못하고 다른 모듈에 의존적인 관계를 가지고 있는 경우입니다.
+
+<b>좋은 설계 : ‘상호 결합도가 낮고 응집도가 높은 설계’</b>
+상호 결합도가 낮기 때문에 모듈을 쉽게 떼어내서 다른 곳에 사용할 수 있고 모듈 간독립성이 있기 때문에 한 부분을 변경하더라도 다른 모듈에 문제를 발생시키지 않습니다. 그럼으로써 자연스럽게 모듈 완성도가 높아져서 응집도가 높아집니다.
+
+1. 단일 책임 원칙
+   - “모든 객체는 책임을 하나만 져야 한다.”
+   - 이점 : 코드 재사용성을 높여줍니다.
+2. 개방-폐쇄 원칙
+   - “확장에는 열려 있고, 변경에는 닫혀 있다.”
+   - 이점 : 상호 결합도를 줄여 새 기능을 추가할 때 기존 구현을 변경하지 않아도 됩니다.
+3. 리스코프 치환 원칙
+   - “q(x)를 타입 T의 객체 x에 대해 증명할 수 있는 속성이라 하자. 그렇다면 S가 T의 하위 타입이라면 q(y)는 타입 S의 객체 y에 대해 증명할 수 있어야 한다.”
+   - 이점 : 예상치 못한 작동을 예방할 수 있습니다.
+4. 인터페이스 분리 원칙
+   - “클라이언트는 자신이 이용하지 않는 메서드에 의존하지 않아야 한다.”
+   - 이점 : 인터페이스를 분리하면 불필요한 메서드들과 의존 관계가 끊어져 더 가볍게 인터페이스를 이용할 수 있습니다.
+5. 의존 관계 역전 원칙
+   - “상위 계층이 하위 계층에 의존하는 전통적인 의존 관계를 반전(역전)시킴으로써 상위 계층이 하위 계층의 구현으로부터 독립되게 할 수 있다.”
+    • 원칙 1 : “상위 모듈은 하위 모듈에 의존해서는 안 된다. 둘 다 추상 모듈에 의존해야 한다.”
+    • 원칙 2 : “추상 모듈은 구체화된 모듈에 의존해서는 안 된다. 구체화된 모듈은 추상 모듈에 의존해야 한다.”
+   - 이점
+    • 구체화된 모듈이 아닌 추상 모듈에 의존함으로써 확장성이 증가합니다.
+    • 상호 결합도가 낮아져서 다른 프로그램으로 이식성이 증가합니다.
 
 <pre><code>
 </code></pre>
 
-### <span style="color:red">※ </span>
+</br>
+
+### <r>※ TEST</r>
+
+- 파일명이 _test.go로 끝나야 합니다
+- testing 패키지를 임포트해야 합니다.
+- 테스트 코드는 func TestXxxx(t *testing.T) 형태이어야 합니다.
+- t.Errorf() 메서드에 테스트 실패 시 실패를 알리고 실패 메시지를 넣을 수 있다.</br>
+  testing.T 객체의 Error()와 Fail() 메서드를 이용해서 테스트 실패를 알릴 수 있습니다.</br>
+  Error()는 테스트가 실패하면 모든 테스트를 중단하지만,</br>
+  Fail()은 테스트가 실패해도 다른 테스트들을 계속 진행합니다.
+
+### stretchr
+
+|메소드명|내용||
+|---|---|---|
+|Equal()     |expected와 actual 두 값을 비교하여 다를 경우 테스트를 실패하고 메시지를 출력.|func Equal(t TestingT, expected, actual interface{}, msgAndArgs ...interface{}) bool|
+|Greater()   |e1이 e2보다 크지 않으면 테스트를 실패하고 메시지를 출력.|func Greater(t TestingT, e1 interface{}, e2 interface{}, msgAndArgs ...interface{}) bool|
+|Len()       |object의 항목 개수가 length가 아니면 테스트를 실패하고 메시지를 출력합니다.|func Len(t TestingT, object interface{}, length int, msgAndArgs ...interface{}) bool|
+|NotNilf()   |object가 nil이면 테스트를 실패하고 메시지를 출력.|func NotNilf(t TestingT, object interface{}, msg string, args ...interface{}) bool|
+|NotEqualf() |expected와 actual이 같으면 테스트를 실패하고 메시지를 출력.|func NotEqualf(t TestingT, expected interface{}, actual interface{}, msg string, args ...interface{}) bool|
+
+### stretchr/testify 패키지에서 제공하는 그외 유용한 기능
+
+- mock 패키지 : 모듈의 행동을 가장하는 목업mockup 객체를 제공. 예를 들어 온라인 기능을 테스트할 때 하위 영역인 네트워크 기능까지 모두 테스트하기는 힘듭니다. 네트워크 객체를 가장하는 목업 객체를 만들 때 유용합니다.
+- suite 패키지 : 테스트 준비 작업이나 테스트 종료 후 뒤처리 작업을 쉽게 할 수 있도록 도와주는 패키지. 예를 들어 테스트에 특정 파일이 있어야 한다면 테스트 시작 전 임시 파일을 생성하고 테스트 종료 후 생성한 임시 파일을 삭제해주는 작업을 만들 때 유용.
+
+</br>
+
+### <r>※ 벤치마크</r>
+
+- 파일명이 _test.go로 끝나야 한다.
+- testing 패키지를 임포트해야 한다.
+- 벤치마크 코드는 func BenchmarkXxxx(b *testing.B) 형태이어야 한다.
 
 <pre><code>
 </code></pre>
 
-### <span style="color:red">※ </span>
+</br>
+
+### <r>※ </r>
 
 <pre><code>
 </code></pre>
@@ -536,6 +616,7 @@ func (s *Student) String() string {
 </br>
 
 # ■ gRPC
+
 - google 에서 만든 오픈소스로, 원격지의 프로시저를 호출하는 프레임워크 입니다.
 - 원격지 프로시저를 수행하는 규칙 및 파라미터 전달을 위한 인터페이스로 protocol buffer 라는 오픈소스를 활용.
 - Blocking & Non-Blocking 을 지원합니다.
@@ -556,8 +637,9 @@ func (s *Student) String() string {
 
 </br>
 
-# ■ gRPC 참조
-|||
+# ■ <r>gRPC 참조</r>
+
+|제목|링크|
 |---|---|
 |참조|https://etloveguitar.tistory.com/107|
 ||https://dev.classmethod.jp/articles/golang-grpc-sample-project/|
@@ -568,3 +650,10 @@ func (s *Student) String() string {
 |||
 |||
 |||
+
+<style>
+r { color: Red }
+o { color: Orange }
+g { color: Green }
+b { color: Blue }
+</style>
