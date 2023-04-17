@@ -50,7 +50,7 @@
 |filepath |func Glob(pattern string) (matches []string, err error)|파일 경로에 해당하는 파일 목록을 가져옴|
 |         |filespaths, err := filepath.Glob("*.txt")|현재 실행 폴더 내 확장자가 txt인 모든 파일 리스트를 반환|
 |strings  |strings.Contains(s, substr string) bool|첫 번째 인수인 s 안에 두 번째 인수인 substr이 포함되어 있는지 여부를 반환하는 함수|
-||||
+|net/http |func ListenAndServe(addr string, handler Handler) error|웹 서버를 시작|
 ||||
 ||||
 ||||
@@ -236,7 +236,8 @@
   데이터를 생성해서 넣어주면 다른 쪽에서 생성된 데이터를 빼서 사용하는 방식을 생산자 소비자 패턴Producer Consumer Pattern이라고 합니다
 - <r>컨텍스트</r></br>
   컨텍스트context는 context 패키지에서 제공하는 기능으로 작업을 지시할 때 작업 가능 시간, 작업 취소 등의 조건을 지시할 수 있는 작업 명세서 역할을 합니다
-- <r></r></br>
+- <r>핸들러</r></br>
+  핸들러란 각 HTTP 요청 URL이 수신됐을 때 그것을 처리하는 함수 또는 객체</br>
 - <r></r></br>
 - 
 
@@ -581,9 +582,48 @@ func (s *Student) String() string {
 
 </br>
 
-### <r>※ </r>
+### <r>※ http.Request 구조체</r>
 
-<pre><code>
+<pre><code>type Request struct {
+    // HTTP 요청 메서드 정보를 가지고 있습니다.
+    // "GET", "POST", "PUT", “DELETE”와 같은 메서드값입니다.
+    Method string
+
+    // HTTP 요청을 보낸 URL 정보를 담고 있습니다.
+    // URL 정보를 이용해서 URL에 포함된 데이터를 쿼리해올 수 있습니다.
+    URL *url.URL
+
+    // HTTP 프로토콜 버전 정보입니다.
+    // HTTP 1.0인지 2.0인지를 알아올 수 있습니다.
+    Proto         string // "HTTP/1.0"
+    ProtoMajor    int // 1
+    ProtoMinor    int // 0
+
+    // HTTP 요청 헤더 정보입니다.
+    // 만약 헤더가 다음과 같다면
+    //
+    // Host: example.com
+    // accept-encoding: gzip, deflate
+    // Accept-Language: en-us
+    // fOO: Bar
+    // foo: two
+    //
+    // 아래와 같이 맵 형태로 변환되어 저장됩니다.
+    //
+    // Header = map[string][]string{
+    //     "Accept-Encoding": {"gzip, deflate"},
+    //     "Accept-Language": {"en-us"},
+    //     "Foo": {"Bar", "two"},
+    // }
+    Header Header
+    // HTTP 요청의 실제 데이터를 담고 있는 바디 정보입니다.
+    // io.Reader 인터페이스를 통해서 데이터를 읽어올 수 있습니다.
+    // io.Reader에 대해서는 A.3절을 참조하세요.
+
+    Body io.ReadCloser
+    // 그외…
+    // http.Request는 이외에도 다양한 정보를 포함하고 있습니다.
+}
 </code></pre>
 
 
@@ -600,7 +640,7 @@ func (s *Student) String() string {
 </br>
 
 # ■ Redis 참조
-|||
+|제목|링크|
 |---|---|
 |Hiredis|http://www.redisgate.com/redis/clients/hiredis_intro.php|
 |참고|https://github.com/jaeho310/go-redis-client|
@@ -634,7 +674,6 @@ func (s *Student) String() string {
   .proto 파일로 구조화된 데이터를 작성하기만 한다면 gRPC가 지원하는 어떤 언어에서든 규약에 상관없이 통신이 가능하다는 것.</br>
   작성된 .proto 로부터 언어에 맞는 stub 를 생산하여 참조하게 되면 이후 별도의 사양서를 볼 필요없이 참조한 stub 만으로도 개발이 가능.
 
-
 </br>
 
 # ■ <r>gRPC 참조</r>
@@ -650,6 +689,8 @@ func (s *Student) String() string {
 |||
 |||
 |||
+
+</br>
 
 <style>
 r { color: Red }
